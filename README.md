@@ -1,5 +1,5 @@
 # mt_contam_domestic_green
-Script to estimate mitochondrial contamination in NGS data from ancient domestics following the Green 2008 approach ([https://doi.org/10.1016/j.cell.2008.06.021])
+Script to estimate mitochondrial contamination in NGS data from ancient domestics following the Green 2008 approach (https://doi.org/10.1016/j.cell.2008.06.021)
 
 This method first identifies sites in a dataset of diverse mitogenomes that are nearly fixed. Consequently, these sites, if different in a subject, can be used to estimate contamination from other samples. Non-consensus reads at such sites are divided by the total number of reads at the position to obtain a point estimate of mitochondrial contamination. We restrict this analysis to sites with at least 10x coverage. Furthermore, transition sites with a C or G in the consensus mitogenome are excluded to avoid over-estimation due to post-mortem damage. Standard errors are estimated assuming a binomial distribution around the point estimate.
 
@@ -9,7 +9,7 @@ Note that the mitochondrial contamination can be very different from nuclear con
 
 *We outline how we used the scripts here but you can obviously collect your own dataset of mitogenomes.*
 
-We first downloaded the sequences used for Dometree ([https://doi.org/10.1111/1755-0998.12386]) from DRYAD: [https://datadryad.org/stash/dataset/doi:10.5061/dryad.cc5kn] and unziped the file.
+We first downloaded the sequences used for Dometree (https://doi.org/10.1111/1755-0998.12386) from DRYAD: https://datadryad.org/stash/dataset/doi:10.5061/dryad.cc5kn and unziped the file.
 
 The file contains folders for cattle, dogs, goats, horses, pigs, sheep, yaks and chickens. To collect sequences for our species of interest, we went into the corresponding folder and extracted the second sequence from each pairwise alignment:
 
@@ -28,6 +28,10 @@ Next, one needs to perform a multiple sequence alignment with the aligner of cho
 ## Preparation of site list
 
 Now, we need to calculate the minor allele frequency (MAF) at each position relative to the reference sequence. We use the Python script `green_mt2tab.py` for this step. It requires to specify the input file (the multiple sequence alignment FASTA) with `-i` one can also provide custom MAF file names with `-o`.
+
+This step needs to be conducted only once per MSA of mitogenomes, the MAT/sites file can then be re-used to estimate contamination in multiple samples.
+
+## Estimating conamination per sample
 
 Next, we can estimate contamination for our sample. We need a BAM file, the reference genome FASTA and `samtools`:
 
