@@ -1,4 +1,4 @@
-# mt_contam_domestic_green
+# Estimating mitochondrial contamination for domestics following Green et al 2008
 Script to estimate mitochondrial contamination in NGS data from ancient domestics following the Green 2008 approach (https://doi.org/10.1016/j.cell.2008.06.021)
 
 This method first identifies sites in a dataset of diverse mitogenomes that are nearly fixed. Consequently, these sites, if different in a subject, can be used to estimate contamination from other samples. Non-consensus reads at such sites are divided by the total number of reads at the position to obtain a point estimate of mitochondrial contamination. We restrict this analysis to sites with at least 10x coverage. Furthermore, transition sites with a C or G in the consensus mitogenome are excluded to avoid over-estimation due to post-mortem damage. Standard errors are estimated assuming a binomial distribution around the point estimate.
